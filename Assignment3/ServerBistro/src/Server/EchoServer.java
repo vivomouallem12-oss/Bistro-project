@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import logic.Order;
+import logic.Subscriber;
 import logic.SubscriberLoginRequest;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
@@ -39,8 +40,7 @@ public class EchoServer extends AbstractServer {
 
                 if (s.equals("getOrders")) {
                     sendAllOrders(conn, client);
-                }
-                else {
+                } else {
                     try {
                         int orderNum = Integer.parseInt(s);
                         fetchSingleOrder(conn, orderNum, client);
@@ -177,28 +177,47 @@ public class EchoServer extends AbstractServer {
         }
     }
 
+    // =========================================================
+    //              SUBSCRIBER LOGIN (FIXED)
+    // =========================================================
     private void handleSubscriberLogin(Connection conn, SubscriberLoginRequest req, ConnectionToClient client) throws Exception {
 
-        System.out.println("[Login Attempt] Subscriber=" +
+        System.out.println("[Login Attempt] Subscriber ID = " +
                 req.getSubscriberId() +
-                " Code=" +
-                req.getConfirmationCode());
+                " Name = " +
+                req.getSubscriberName());
 
-        // ---- FIXED: CHECK SUBSCRIBER TABLE ----
-        String sql = "SELECT * FROM subscriber WHERE subscriber_id = ? AND confirmation_code = ?";
+        String sql =
+        	    "SELECT * FROM subscriber " +
+        	    "WHERE subscriber_id = ? " +
+        	    "AND BINARY subscriber_name = ?";
+
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            // If subscriber_id in DB is INT:
             ps.setInt(1, Integer.parseInt(req.getSubscriberId()));
-
-            ps.setString(2, req.getConfirmationCode());
+            ps.setString(2, req.getSubscriberName());
 
             try (ResultSet rs = ps.executeQuery()) {
 
                 if (rs.next()) {
-                    client.sendToClient("LOGIN_OK");
-                    System.out.println("[Login] SUCCESS");
+
+                    // ✅ Build Subscriber from REAL DB DATA
+                	Subscriber sub = new Subscriber(
+                	        rs.getInt("subscriber_id"),
+                	        rs.getString("subscriber_name"),
+                	        rs.getString("subscriber_email"),
+                	        rs.getString("subscriber_phone")
+                	);
+
+                	System.out.println("=== SERVER SUBSCRIBER BUILT ===");
+                	System.out.println("ID: " + sub.getSubscriberId());
+                	System.out.println("USERNAME: " + sub.getUsername());
+
+
+                    client.sendToClient(sub);
+                    System.out.println("[Login] SUCCESS -> Subscriber object sent for " +
+                            sub.getUsername() + " (ID: " + sub.getSubscriberId() + ")");
                 } else {
                     client.sendToClient("LOGIN_FAIL");
                     System.out.println("[Login] FAIL");

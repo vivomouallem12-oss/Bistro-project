@@ -5,13 +5,13 @@ import java.io.Serializable;
 public class SubscriberLoginRequest implements Serializable {
 
     private String subscriberId;
-    private String confirmationCode;
+    private String SubscriberName;
 
-    public SubscriberLoginRequest(String id, String code) {
+    public SubscriberLoginRequest(String id, String Name) {
         this.subscriberId = id;
-        this.confirmationCode = code;
+        this.SubscriberName = Name;
     }
 
     public String getSubscriberId() { return subscriberId; }
-    public String getConfirmationCode() { return confirmationCode; }
+    public String getSubscriberName() { return SubscriberName; }
 }

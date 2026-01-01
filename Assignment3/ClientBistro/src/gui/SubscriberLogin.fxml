@@ -25,7 +25,7 @@
 
     <!-- Confirmation Code -->
     <Label text="Confirmation Code"/>
-    <TextField fx:id="confirmationCodeField"
+   <TextField fx:id="username"
                promptText="Enter Reservation Code" />
 
     <!-- Buttons -->

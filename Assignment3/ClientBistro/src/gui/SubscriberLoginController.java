@@ -16,7 +16,7 @@ public class SubscriberLoginController {
     private TextField subscriberIdField;
 
     @FXML
-    private TextField confirmationCodeField;
+    private TextField username; // subscriber name
 
     @FXML
     private Label errorLabel;
@@ -27,7 +27,7 @@ public class SubscriberLoginController {
     @FXML
     private void onLogin() {
         String id = subscriberIdField.getText();
-        String code = confirmationCodeField.getText();
+        String name = username.getText();
 
         // Validation
         if (id == null || id.trim().isEmpty()) {
@@ -35,13 +35,13 @@ public class SubscriberLoginController {
             return;
         }
 
-        if (code == null || code.trim().isEmpty()) {
-            errorLabel.setText("Confirmation code is required");
+        if (name == null || name.trim().isEmpty()) {
+            errorLabel.setText("Subscriber name is required");
             return;
         }
 
         try {
-            SubscriberLoginRequest req = new SubscriberLoginRequest(id, code);
+            SubscriberLoginRequest req = new SubscriberLoginRequest(id, name);
             ClientUI.chat.sendToServer(req);
             errorLabel.setText(""); // clear error
         } catch (Exception e) {
@@ -69,32 +69,11 @@ public class SubscriberLoginController {
             e.printStackTrace();
         }
     }
-
-    /** ==========================================================
-     *  This method is called FROM ClientController on success
-     *  ========================================================== */
-    public void openSubscriberHome() {
-        Platform.runLater(() -> {
-            try {
-                Stage stage =
-                        (Stage) subscriberIdField.getScene().getWindow();
-
-                FXMLLoader loader =
-                        new FXMLLoader(getClass().getResource("/gui/SubscriberHome.fxml"));
-
-                Scene scene = new Scene(loader.load());
-                stage.setScene(scene);
-                stage.setTitle("Subscriber Home");
-                stage.show();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
+    
 
     /** Server error display helper */
     public static void showServerError(String msg) {
+        // you can later connect this to a Label in the login screen
         Platform.runLater(() -> System.out.println("Server Error: " + msg));
     }
 }
