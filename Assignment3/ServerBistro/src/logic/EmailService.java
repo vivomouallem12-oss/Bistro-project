@@ -2,6 +2,8 @@ package logic;
 
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
+
+import java.util.List;
 import java.util.Properties;
 import jakarta.activation.*;
 
@@ -88,8 +90,7 @@ public class EmailService {
     
     
     
-    public static void LostCodeEmail(String toEmail, int confirmationCode) {
-
+    public static void LostCodeEmail(String toEmail, List<String> codes) {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -109,14 +110,15 @@ public class EmailService {
                 Message.RecipientType.TO,
                 InternetAddress.parse(toEmail)
             );
-            message.setSubject("Confirmation Code");
-            message.setText(
-                "Thank you for your reservation!\n\n" +
-                "Your confirmation code is: " + confirmationCode + "\n\n" +
-                "Please keep this code to view or cancel your reservation."
-            );
+            message.setSubject("Reservation Codes");
+            StringBuilder sb = new StringBuilder();
+            sb.append("Current Reservation codes:\n");
+            for (String code : codes) {
+            	sb.append(code+"\n");
+            }
+            message.setText(sb.toString());
             Transport.send(message);
-            System.out.println("[EMAIL] Confirmation code sent to " + toEmail);
+            System.out.println("[EMAIL] Lost codes sent to " + toEmail);
 
         } catch (MessagingException e) {
             e.printStackTrace();
@@ -124,7 +126,4 @@ public class EmailService {
         }
     }
     
-    public static void main(String[] args) {
-		sendReminderEmail("mhmadda25@gmail.com");
-	}
  }

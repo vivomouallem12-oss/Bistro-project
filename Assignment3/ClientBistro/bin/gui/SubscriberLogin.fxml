@@ -1,40 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<VBox spacing="15"
-      alignment="CENTER"
-      prefWidth="360"
-      prefHeight="360"
-      style="-fx-padding: 20;"
-      xmlns="http://javafx.com/javafx/17"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="gui.SubscriberLoginController">
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="gui.SubscriberLoginController"
+            prefWidth="420" prefHeight="320"
+            style="-fx-background-color: linear-gradient(to bottom, #0e1320, #111b34);">
 
-    <!-- Title -->
-    <Label text="Subscriber Login"
-           style="-fx-font-size: 22px; -fx-font-weight: bold;" />
+    <children>
+        <VBox spacing="14"
+              alignment="CENTER"
+              AnchorPane.topAnchor="0"
+              AnchorPane.bottomAnchor="0"
+              AnchorPane.leftAnchor="0"
+              AnchorPane.rightAnchor="0">
 
-    <Label text="Please enter your credentials:" />
+            <padding>
+                <Insets top="25" bottom="25" left="30" right="30"/>
+            </padding>
 
-    <!-- Subscriber ID -->
-    <Label text="Subscriber ID"/>
-    <TextField fx:id="subscriberIdField"
-               promptText="Enter Subscriber ID" />
+            <!-- TITLE -->
+            <Label text="Subscriber Login"
+                   style="-fx-font-size: 20px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: white;"/>
 
-    <!-- Confirmation Code -->
-    <Label text="Confirmation Code"/>
-   <TextField fx:id="username"
-               promptText="Enter Reservation Code" />
+            <!-- SUBSCRIBER ID -->
+            <TextField fx:id="txtSubscriberId"
+                       promptText="Subscriber ID"
+                       prefWidth="260"/>
 
-    <!-- Buttons -->
-    <HBox spacing="10" alignment="CENTER">
-        <Button text="Login" onAction="#onLogin"/>
-        <Button text="Back" onAction="#onBack"/>
-    </HBox>
+            <!-- SUBSCRIBER NAME -->
+            <TextField fx:id="txtSubscriberName"
+                       promptText="Subscriber Name"
+                       prefWidth="260"/>
 
-    <!-- Error -->
-    <Label fx:id="errorLabel" textFill="red"/>
+            <!-- STATUS / ERROR MESSAGE -->
+            <Label fx:id="lblStatus"
+                   text=""
+                   wrapText="true"
+                   style="-fx-text-fill: #ff4d4d;
+                          -fx-font-size: 13px;"/>
 
-</VBox>
+            <!-- LOGIN BUTTON -->
+            <Button text="Login"
+                    prefWidth="260"
+                    onAction="#onLogin"
+                    style="-fx-background-color: #5240d0;
+                           -fx-text-fill: white;
+                           -fx-font-size: 14px;
+                           -fx-background-radius: 10;"/>
+
+            <!-- BACK BUTTON -->
+            <Button text="Back"
+                    prefWidth="260"
+                    onAction="#onBack"
+                    style="-fx-background-color: #2b2f45;
+                           -fx-text-fill: white;
+                           -fx-font-size: 13px;
+                           -fx-background-radius: 10;"/>
+
+        </VBox>
+    </children>
+</AnchorPane>

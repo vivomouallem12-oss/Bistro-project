@@ -2,103 +2,147 @@ package logic;
 
 import java.io.Serializable;
 
-public class Order implements Serializable {
-
-    private int orderNumber;            // reservation id
-    private String orderDate;           // date of reservation (the day they come)
-    private int numberOfGuests;
-    private String confirmationCode;    // may include letters
-    private Integer subscriberId;       // nullable (guest or subscriber)
-    private String dateOfPlacingOrder;  // when order was created
-    private String status;              // confirmed / cancelled / completed / no_show
-
-    public Order(int orderNumber,
-                 String orderDate,
-                 int numberOfGuests,
-                 String confirmationCode,
-                 Integer subscriberId,
-                 String dateOfPlacingOrder,
-                 String status) {
-
-        this.orderNumber = orderNumber;
-        this.orderDate = orderDate;
-        this.numberOfGuests = numberOfGuests;
-        this.confirmationCode = confirmationCode;
-        this.subscriberId = subscriberId;
-        this.dateOfPlacingOrder = dateOfPlacingOrder;
-        this.status = status;
-    }
-
-    public Order(int i, Object object, int j, int k, int l, Object object2) {
-		// TODO Auto-generated constructor stub
+public class Order implements Serializable{
+	
+	private int order_number;
+	private String order_date;
+	private String order_time;
+	private int number_of_guests;
+	private int confirmation_code;
+	private int subscriber_id; 
+	private String customer_phone;
+	private String customer_email;
+	private String date_of_placing_order;
+	private int table_num;
+	private String order_status;
+	private String status_datetime;
+	
+	
+	public Order(int order_number, String order_date, String order_time, int number_of_guests, int confirmation_code, int subscriber_id,String customer_phone,String customer_email,String date_of_placing_order,int table_num,String order_status,String status_datetime) {
+		this.order_number = order_number;
+		this.order_date = order_date;
+		this.order_time = order_time;
+		this.number_of_guests = number_of_guests;
+		this.confirmation_code = confirmation_code;
+		this.subscriber_id = subscriber_id;
+		this.customer_phone = customer_phone;
+		this.customer_email = customer_email;
+		this.date_of_placing_order = date_of_placing_order;
+		this.table_num = table_num;
+		this.order_status = order_status;
+		this.status_datetime = status_datetime;
+	}
+	public String getCustomer_phone() {
+		return customer_phone;
 	}
 
-	public int getOrderNumber() {
-        return orderNumber;
-    }
+	public void setCustomer_phone(String customer_phone) {
+		this.customer_phone = customer_phone;
+	}
 
-    public void setOrderNumber(int orderNumber) {
-        this.orderNumber = orderNumber;
-    }
+	public int getOrder_number() {
+		return order_number;
+	}
+	public void setOrder_number(int order_number) {
+		this.order_number = order_number;
+	}
 
-    public String getOrderDate() {
-        return orderDate;
-    }
+	public String getCustomer_email() {
+		return customer_email;
+	}
 
-    public void setOrderDate(String orderDate) {
-        this.orderDate = orderDate;
-    }
+	public void setCustomer_email(String customer_email) {
+		this.customer_email = customer_email;
+	}
 
-    public int getNumberOfGuests() {
-        return numberOfGuests;
-    }
+	public String getOrder_date() {
+		return order_date;
+	}
 
-    public void setNumberOfGuests(int numberOfGuests) {
-        this.numberOfGuests = numberOfGuests;
-    }
 
-    public String getConfirmationCode() {
-        return confirmationCode;
-    }
+	public void setOrder_date(String order_date) {
+		this.order_date = order_date;
+	}
+	
+	public String getOrder_time() {
+		return order_time;
+	}
 
-    public void setConfirmationCode(String confirmationCode) {
-        this.confirmationCode = confirmationCode;
-    }
 
-    public Integer getSubscriberId() {
-        return subscriberId;
-    }
+	public void setOrder_time(String order_time) {
+		this.order_time= order_time;
+	}
 
-    public void setSubscriberId(Integer subscriberId) {
-        this.subscriberId = subscriberId;
-    }
 
-    public String getDateOfPlacingOrder() {
-        return dateOfPlacingOrder;
-    }
+	public int getNumber_of_guests() {
+		return number_of_guests;
+	}
+	public void setNumber_of_guests(int number_of_guests) {
+		this.number_of_guests = number_of_guests;
+	}
 
-    public void setDateOfPlacingOrder(String dateOfPlacingOrder) {
-        this.dateOfPlacingOrder = dateOfPlacingOrder;
-    }
 
-    public String getStatus() {
-        return status;
-    }
+	public int getConfirmation_code() {
+		return confirmation_code;
+	}
+	public void setConfirmation_code(int confirmation_code) {
+		this.confirmation_code = confirmation_code;
+	}
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "orderNumber=" + orderNumber +
-                ", orderDate='" + orderDate + '\'' +
-                ", numberOfGuests=" + numberOfGuests +
-                ", confirmationCode='" + confirmationCode + '\'' +
-                ", subscriberId=" + subscriberId +
-                ", dateOfPlacingOrder='" + dateOfPlacingOrder + '\'' +
-                ", status='" + status + '\'' +
-                '}';
-    }
+	public int getSubscriber_id() {
+		return subscriber_id;
+	}
+	public void setSubscriber_id(int subscriber_id) {
+		this.subscriber_id = subscriber_id;
+	}
+
+
+	public String getDate_of_placing_order() {
+		return date_of_placing_order;
+	}
+	public void setDate_of_placing_order(String date_of_placing_order) {
+		this.date_of_placing_order = date_of_placing_order;
+	}
+	
+	public int getTable_num() {
+		return table_num;
+	}
+	
+	public void setTable_num(int tableNum) {
+		this.table_num = tableNum;
+	}
+	
+
+	public String getOrder_status() {
+		return order_status;
+	}
+
+	public void setOrder_status(String order_status) {
+		this.order_status = order_status;
+	}
+
+	public String getStatus_datetime() {
+		return status_datetime;
+	}
+
+	public void setStatus_datetime(String status_datetime) {
+		this.status_datetime = status_datetime;
+	}
+
+	@Override
+	public String toString() {
+		return "Order [order_number=" + order_number + ", order_date=" + order_date + ", order_time=" + order_time
+				+ ", number_of_guests=" + number_of_guests + ", confirmation_code=" + confirmation_code
+				+ ", subscriber_id=" + subscriber_id + ", customer_phone=" + customer_phone + ", customer_email=" + customer_email 
+				+ ", date_of_placing_order=" + date_of_placing_order + ", table_num=" + table_num + ", order_status="+order_status+", status_datetime="+status_datetime+"]";
+	}
+
+
+
+	
+	
+	
+	
+
 }
